@@ -1,0 +1,28 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+.sidebar-item {
+    @apply my-2 block w-full px-2 pl-3 cursor-pointer capitalize py-1 bg-white rounded-full transition-all;
+}
+.sidebar-item:hover {
+    @apply bg-blue-500 text-white;
+}
+
+.sidebar-item__active {
+    @apply bg-blue-500 text-white;
+}
+
+.alert-element {
+    @apply fixed top-0 left-0 w-[100vw] h-[100vh] bg-black bg-opacity-90 flex justify-center align-middle items-center;
+}
+
+.primary-dashboard-btn {
+    @apply px-2 py-1 text-center rounded-md bg-blue-500 text-white uppercase;
+}
+.warning-dashboard-btn {
+    @apply px-2 py-1 text-center rounded-md bg-orange-500 text-white uppercase;
+}
+.danger-dashboard-btn {
+    @apply px-2 py-1 text-center rounded-md bg-red-500 text-white uppercase;
+}
