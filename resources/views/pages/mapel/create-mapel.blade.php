@@ -4,19 +4,19 @@
    <form action="{{ route('auth.mapel.store') }}" method="post">
       @csrf
       <label for="nama" class="block"><span class="block">nama</span>
-         <input class="block w-full px-2 py-1 rounded-md" type="text" name="nama">
+         <input value="{{ old('nama') }}" class="block w-full px-2 py-1 rounded-md" type="text" name="nama">
          @error('nama')
             <div class="text-red-600">{{ $message }}</div>
          @enderror
       </label>
       <label for="kelas" class="block"><span class="block">kelas</span>
-         <input class="block w-full px-2 py-1 rounded-md" type="number" name="kelas">
+         <input value="{{ old('kelas') }}" class="block w-full px-2 py-1 rounded-md" type="number" name="kelas">
          @error('kelas')
             <div class="text-red-600">{{ $message }}</div>
          @enderror
       </label>
       <label for="deskripsi" class="block"><span class="block">deskripsi</span>
-         <input class="block w-full px-2 py-1 rounded-md" type="text" name="deskripsi">
+         <input value="{{ old('deskripsi') }}" class="block w-full px-2 py-1 rounded-md" type="text" name="deskripsi">
          @error('deskripsi')
             <div class="text-red-600">{{ $message }}</div>
          @enderror
