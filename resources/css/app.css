@@ -26,3 +26,19 @@
 .danger-dashboard-btn {
     @apply px-2 py-1 text-center rounded-md bg-red-500 text-white uppercase;
 }
+
+.my-red-500 {
+    @apply bg-red-500;
+}
+.my-yellow-500 {
+    @apply bg-yellow-500;
+}
+.my-green-500 {
+    @apply bg-green-500;
+}
+.my-orange-500 {
+    @apply bg-orange-500;
+}
+.my-blue-500 {
+    @apply bg-blue-500;
+}

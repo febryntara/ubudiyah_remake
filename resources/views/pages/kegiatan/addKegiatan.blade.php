@@ -74,7 +74,7 @@
          @enderror
       </label>
       <div class="text-center my-2">
-         <button class="primary-dashboard-btn" type="submit">tambah pengguna</button>
+         <button class="primary-dashboard-btn" type="submit">tambah kegiatan</button>
       </div>
    </form>
 @endsection

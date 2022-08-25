@@ -40,10 +40,10 @@ Route::get('/dashboard/mata-pelajaran/{mapel}', [MapelController::class, 'detail
 Route::get('/dashboard/kegiatan', [SchoolEventController::class, 'index'])->name('auth.schoolEvent.all');
 Route::get('/dashboard/kegiatan/tambah', [SchoolEventController::class, 'create'])->name('auth.schoolEvent.create')->middleware('auth');
 Route::post('/dashboard/kegiatan/store', [SchoolEventController::class, 'store'])->name('auth.schoolEvent.store')->middleware('auth');
+Route::get('/dashboard/kegiatan/detail/{schoolEvent}', [SchoolEventController::class, 'detail'])->name('auth.schoolEvent.detail');
 Route::get('/dashboard/kegiatan/edit/{schoolEvent}', [SchoolEventController::class, 'edit'])->name('auth.schoolEvent.edit')->middleware('auth');
 Route::patch('/dashboard/kegiatan/patch/{schoolEvent}', [SchoolEventController::class, 'patch'])->name('auth.schoolEvent.patch')->middleware('auth');
 Route::delete('/kegiatan/delete/{schoolEvent}', [SchoolEventController::class, 'delete'])->name('auth.schoolEvent.delete')->middleware('auth');
-Route::get('/dashboard/kegiatan/{shcoolEvent}', [SchoolEventController::class, 'detail'])->name('auth.schoolEvent.detail');
 
 //manajemen user
 Route::get('/dashboard/manajemen-akun', [UserController::class, 'allUser'])->name('auth.manajemen-user')->middleware('auth');

@@ -24,6 +24,8 @@
                href="{{ route('auth.mapel.all') }}">Mata Pelajaran</a></li>
          <li><a class="sidebar-item {{ Request::is('dashboard/manajemen-akun') ? 'sidebar-item__active' : null }}"
                href="{{ route('auth.manajemen-user') }}">Manajemen Akun</a></li>
+         <li><a class="sidebar-item {{ Request::is('dashboard/kegiatan') ? 'sidebar-item__active' : null }}"
+               href="{{ route('auth.schoolEvent.all') }}">Kegiatan Sekolah</a></li>
       </ul>
       <div class="p-2 w-full">
          @yield('content')

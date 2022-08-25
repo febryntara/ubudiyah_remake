@@ -48,9 +48,9 @@ class SchoolEventController extends Controller
 
         $bool = SchoolEvent::create($validated);
         if ($bool) {
-            return back()->with('sucess', 'Kegiatan Berhasil Dibuat');
+            return redirect()->route('auth.schoolEvent.all')->with('success', 'Kegiatan Berhasil Dibuat');
         }
-        return back()->with('error', 'Kegiatan Gagal Dibuat');
+        return redirect()->route('auth.schoolEvent.all')->with('error', 'Kegiatan Gagal Dibuat');
     }
 
     public function edit(SchoolEvent $schoolEvent)
@@ -87,9 +87,9 @@ class SchoolEventController extends Controller
     {
         $bool = $schoolEvent->delete();
         if ($bool) {
-            return back()->with('success', 'Kegiatan Berhasil Dihapus');
+            return redirect()->route('auth.schoolEvent.all')->with('success', 'Kegiatan Berhasil Dihapus');
         }
-        return back()->with('error', 'Kegiatan Gagal Dihapus');
+        return redirect()->route('auth.schoolEvent.all')->with('error', 'Kegiatan Gagal Dihapus');
     }
 
     public function statusChange(SchoolEvent $schoolEvent, Request $request)
