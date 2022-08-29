@@ -23,25 +23,23 @@ class DatabaseSeeder extends Seeder
             'name' => 'siswa'
         ]);
         UserRole::create([
-            'name' => 'calon_siswa'
+            'name' => 'umum'
         ]);
         UserRole::create([
             'name' => 'guru'
-        ]);
-        UserRole::create([
-            'name' => 'orang_tua'
         ]);
 
         User::create([
             'email' => 'admin@gmail.com',
             'name' => 'administrator',
             'password' => Hash::make('adminadmin'),
-            'role_id' => '1',
+            'role_id' => '3',
             'umur' => '120',
             'tanggal_lahir' => Carbon::now(),
             'tempat_lahir' => 'denpasar',
             'jenis_kelamin' => '0',
         ]);
+        User::factory(40)->create();
         // \App\Models\User::factory(10)->create();
 
         // \App\Models\User::factory()->create([

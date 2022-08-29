@@ -1,6 +1,8 @@
 <?php
 
+use App\Http\Controllers\AbsensiController;
 use App\Http\Controllers\MapelController;
+use App\Http\Controllers\PembayaranSppController;
 use App\Http\Controllers\SchoolEventController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
@@ -52,5 +54,21 @@ Route::get('/dashboard/manajemen-akun/detail/{user}', [UserController::class, 'd
 Route::get('/dashboard/manajemen-akun/edit/{user}', [UserController::class, 'editUser'])->name('auth.manajemen-user.edit')->middleware('auth');
 Route::patch('/dashboard/manajemen-akun/update/{user}', [UserController::class, 'patch'])->name('auth.manajemen-user.patch')->middleware('auth');
 Route::delete('/dashboard/manajemen-akun/delete/{user}', [UserController::class, 'deleteUser'])->name('auth.manajemen-user.delete')->middleware('auth');
+
+//absensi
+Route::get('/dashboard/absensi', [AbsensiController::class, 'index'])->name('auth.absensi.all')->middleware('auth');
+Route::get('/dashboard/absensi/validasi', [AbsensiController::class, 'validasiSebelumAbsen'])->name('auth.absensi.validasi')->middleware('auth');
+Route::get('/dashboard/absensi/tambah', [AbsensiController::class, 'create'])->name('auth.absensi.create')->middleware('auth');
+Route::get('/dashboard/absensi/edit/{absen}', [AbsensiController::class, 'edit'])->name('auth.absensi.edit')->middleware('auth');
+Route::patch('/dashboard/absensi/patch/{absen}', [AbsensiController::class, 'patch'])->name('auth.absensi.patch')->middleware('auth');
+Route::delete('/dashboard/absensi/delete/{absen}', [AbsensiController::class, 'delete'])->name('auth.absensi.delete')->middleware('auth');
+Route::post('/dashboard/absensi/simpan', [AbsensiController::class, 'store'])->name('auth.absensi.store')->middleware('auth');
+
+
+// pembayaran spp
+Route::get('/dashboard/pembayaran-spp', [PembayaranSppController::class, 'index'])->name('auth.pembayaran-spp.all')->middleware('auth');
+// Route::get('/dashboard/pembayaran-')
+
+
 //autenticate user
 Route::get('/dashboard', [UserController::class, 'dashboard'])->name('pages.dashboard')->middleware('auth');

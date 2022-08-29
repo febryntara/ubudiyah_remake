@@ -26,6 +26,10 @@
                href="{{ route('auth.manajemen-user') }}">Manajemen Akun</a></li>
          <li><a class="sidebar-item {{ Request::is('dashboard/kegiatan') ? 'sidebar-item__active' : null }}"
                href="{{ route('auth.schoolEvent.all') }}">Kegiatan Sekolah</a></li>
+         <li><a class="sidebar-item {{ Request::is('dashboard/absensi') ? 'sidebar-item__active' : null }}"
+               href="{{ route('auth.absensi.all') }}">Absensi Siswa</a></li>
+         <li><a class="sidebar-item {{ Request::is('dashboard/absensi') ? 'sidebar-item__active' : null }}"
+               href="{{ route('auth.absensi.all') }}">Pembayaran SPP</a></li>
       </ul>
       <div class="p-2 w-full">
          @yield('content')
