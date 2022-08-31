@@ -54,12 +54,21 @@ class Absensi extends Model
             DetailAbsensi::where('absensi_id', $absensi->id)->delete();
         }
         foreach ($validated_request['siswa'] as $data => $value) {
-            $boolean_checker = DetailAbsensi::create([
-                'absensi_id' => $absensi->id,
-                'siswa_id' => $value['id'],
-                'tanggal' => $validated_request['tanggal'],
-                'absensi' => $value['absen']
-            ]);
+            if ($do == 'create') {
+                $boolean_checker = DetailAbsensi::create([
+                    'absensi_id' => $absen->id,
+                    'siswa_id' => $value['id'],
+                    'tanggal' => $validated_request['tanggal'],
+                    'absensi' => $value['absen']
+                ]);
+            } else {
+                $boolean_checker = DetailAbsensi::create([
+                    'absensi_id' => $absensi->id,
+                    'siswa_id' => $value['id'],
+                    'tanggal' => $validated_request['tanggal'],
+                    'absensi' => $value['absen']
+                ]);
+            }
             if (!$boolean_checker) {
                 $error_counter_return++;
             }

@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Mapel;
+use App\Models\SchoolEvent;
 use App\Models\User;
 use App\Models\UserRole;
 use Illuminate\Http\Request;
@@ -160,8 +162,14 @@ class UserController extends Controller
 
     public function dashboard()
     {
+        $user = User::all();
         $data = [
             'title' => 'Dashbaord',
+            'siswa' => $user->where('role_id', 1)->count(),
+            'guru' => $user->where('role_id', 3)->count(),
+            'umum' => $user->where('role_id', 2)->count(),
+            'mapel' => Mapel::all()->count(),
+            'event' => SchoolEvent::all()->count()
         ];
         return view('pages.autenticate.dashboard', $data);
     }
