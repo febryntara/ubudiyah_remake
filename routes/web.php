@@ -67,7 +67,12 @@ Route::post('/dashboard/absensi/simpan', [AbsensiController::class, 'store'])->n
 
 // pembayaran spp
 Route::get('/dashboard/pembayaran-spp', [PembayaranSppController::class, 'index'])->name('auth.pembayaran-spp.all')->middleware('auth');
-// Route::get('/dashboard/pembayaran-')
+Route::get('/dashboard/pembayaran-spp/pra-ases', [PembayaranSppController::class, 'pra_akses'])->name('auth.pembayaran-spp.pra-akses')->middleware('auth');
+Route::get('/dashboard/pembayaran-spp/tambah', [PembayaranSppController::class, 'create'])->name('auth.pembayaran-spp.create')->middleware('auth');
+Route::post('/dashboard/pembayaran-spp/store', [PembayaranSppController::class, 'store'])->name('auth.pembayaran-spp.store')->middleware('auth');
+Route::get('/dashboard/pembayaran-spp/edit/{spp}', [PembayaranSppController::class, 'edit'])->name('auth.pembayaran-spp.edit')->middleware('auth');
+Route::patch('/dashboard/pembayaran-spp/patch/{spp}', [PembayaranSppController::class, 'patch'])->name('auth.pembayaran-spp.patch')->middleware('auth');
+Route::delete('/dashboard/pembayaran-spp/delete/{spp}', [PembayaranSppController::class, 'delete'])->name('auth.pembayaran-spp.delete')->middleware('auth');
 
 
 //autenticate user

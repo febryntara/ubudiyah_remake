@@ -13,12 +13,11 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('pembayaran_spps', function (Blueprint $table) {
+        Schema::create('detail_bayar_spps', function (Blueprint $table) {
             $table->id();
-            $table->integer('kelas');
-            $table->string('bulan');
-            $table->integer('sudah_bayar')->default(0);
-            $table->integer('belum_bayar')->default(0);
+            $table->integer('pembayaran_id');
+            $table->integer('siswa_id');
+            $table->integer('status_bayar')->default(0);
             $table->timestamps();
         });
     }
@@ -30,6 +29,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('pembayaran_spps');
+        Schema::dropIfExists('detail_bayar_spps');
     }
 };
