@@ -1,7 +1,8 @@
 @extends('layouts.dashboard')
 
 @section('content')
-   <form action="{{ route('auth.schoolEvent.store') }}" method="post">
+   @dump($errors)
+   <form action="{{ route('auth.schoolEvent.store') }}" method="post" enctype="multipart/form-data">
       @csrf
       <label for="nama">
          <span class="capitalize font-semibold">Nama Kegiatan</span>
@@ -72,6 +73,14 @@
          <input value="{{ old('waktu_selesai') }}" type="time" name="waktu_selesai"
             class="block w-full px-2 py-1 border-[1px] border-black" id="waktu_selesai">
          @error('waktu_selesai')
+            <div class="text-red-500 text-xs">{{ $message }}</div>
+         @enderror
+      </label>
+      <label for="gambar">
+         <span class="capitalize font-semibold">Tambah Gambar</span>
+         <input type="file" name="gambar[]" class="block w-full px-2 py-1 border-[1px] border-black" id="gambar"
+            multiple>
+         @error('gambar')
             <div class="text-red-500 text-xs">{{ $message }}</div>
          @enderror
       </label>
