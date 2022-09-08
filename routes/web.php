@@ -20,7 +20,7 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
     return view('welcome');
-});
+})->name('home');
 
 // autenticate
 Route::get('/login', [UserController::class, 'login'])->name('auth.loginForm')->middleware('guest');
@@ -39,30 +39,30 @@ Route::delete('/dashboard/mata-pelajaran/delete/{mapel}', [MapelController::clas
 Route::get('/dashboard/mata-pelajaran/{mapel}', [MapelController::class, 'detail'])->name('auth.mapel.detail');
 
 //kegiatan acara
-Route::get('/dashboard/kegiatan', [SchoolEventController::class, 'index'])->name('auth.schoolEvent.all');
-Route::get('/dashboard/kegiatan/tambah', [SchoolEventController::class, 'create'])->name('auth.schoolEvent.create')->middleware('auth');
-Route::post('/dashboard/kegiatan/store', [SchoolEventController::class, 'store'])->name('auth.schoolEvent.store')->middleware('auth');
-Route::get('/dashboard/kegiatan/detail/{schoolEvent}', [SchoolEventController::class, 'detail'])->name('auth.schoolEvent.detail');
-Route::get('/dashboard/kegiatan/edit/{schoolEvent}', [SchoolEventController::class, 'edit'])->name('auth.schoolEvent.edit')->middleware('auth');
-Route::patch('/dashboard/kegiatan/patch/{schoolEvent}', [SchoolEventController::class, 'patch'])->name('auth.schoolEvent.patch')->middleware('auth');
-Route::delete('/kegiatan/delete/{schoolEvent}', [SchoolEventController::class, 'delete'])->name('auth.schoolEvent.delete')->middleware('auth');
+Route::get('/dashboard/kegiatan', [SchoolEventController::class, 'index'])->name('auth.schoolEvent.all')->middleware('guru');
+Route::get('/dashboard/kegiatan/tambah', [SchoolEventController::class, 'create'])->name('auth.schoolEvent.create')->middleware('guru');
+Route::post('/dashboard/kegiatan/store', [SchoolEventController::class, 'store'])->name('auth.schoolEvent.store')->middleware('guru');
+Route::get('/dashboard/kegiatan/detail/{schoolEvent}', [SchoolEventController::class, 'detail'])->name('auth.schoolEvent.detail')->middleware('guru');
+Route::get('/dashboard/kegiatan/edit/{schoolEvent}', [SchoolEventController::class, 'edit'])->name('auth.schoolEvent.edit')->middleware('guru');
+Route::patch('/dashboard/kegiatan/patch/{schoolEvent}', [SchoolEventController::class, 'patch'])->name('auth.schoolEvent.patch')->middleware('guru');
+Route::delete('/kegiatan/delete/{schoolEvent}', [SchoolEventController::class, 'delete'])->name('auth.schoolEvent.delete')->middleware('guru');
 
 //manajemen user
-Route::get('/dashboard/manajemen-akun', [UserController::class, 'allUser'])->name('auth.manajemen-user')->middleware('auth');
-Route::get('/dashboard/manajemen-akun/register', [UserController::class, 'registerUser'])->name('auth.manajemen-user.register')->middleware('auth');
-Route::get('/dashboard/manajemen-akun/detail/{user}', [UserController::class, 'detailUser'])->name('auth.manajemen-user.detail')->middleware('auth');
-Route::get('/dashboard/manajemen-akun/edit/{user}', [UserController::class, 'editUser'])->name('auth.manajemen-user.edit')->middleware('auth');
-Route::patch('/dashboard/manajemen-akun/update/{user}', [UserController::class, 'patch'])->name('auth.manajemen-user.patch')->middleware('auth');
-Route::delete('/dashboard/manajemen-akun/delete/{user}', [UserController::class, 'deleteUser'])->name('auth.manajemen-user.delete')->middleware('auth');
+Route::get('/dashboard/manajemen-akun', [UserController::class, 'allUser'])->name('auth.manajemen-user')->middleware('guru');
+Route::get('/dashboard/manajemen-akun/register', [UserController::class, 'registerUser'])->name('auth.manajemen-user.register')->middleware('guru');
+Route::get('/dashboard/manajemen-akun/detail/{user}', [UserController::class, 'detailUser'])->name('auth.manajemen-user.detail')->middleware('guru');
+Route::get('/dashboard/manajemen-akun/edit/{user}', [UserController::class, 'editUser'])->name('auth.manajemen-user.edit')->middleware('guru');
+Route::patch('/dashboard/manajemen-akun/update/{user}', [UserController::class, 'patch'])->name('auth.manajemen-user.patch')->middleware('guru');
+Route::delete('/dashboard/manajemen-akun/delete/{user}', [UserController::class, 'deleteUser'])->name('auth.manajemen-user.delete')->middleware('guru');
 
 //absensi
-Route::get('/dashboard/absensi', [AbsensiController::class, 'index'])->name('auth.absensi.all')->middleware('auth');
-Route::get('/dashboard/absensi/validasi', [AbsensiController::class, 'validasiSebelumAbsen'])->name('auth.absensi.validasi')->middleware('auth');
-Route::get('/dashboard/absensi/tambah', [AbsensiController::class, 'create'])->name('auth.absensi.create')->middleware('auth');
-Route::get('/dashboard/absensi/edit/{absen}', [AbsensiController::class, 'edit'])->name('auth.absensi.edit')->middleware('auth');
-Route::patch('/dashboard/absensi/patch/{absen}', [AbsensiController::class, 'patch'])->name('auth.absensi.patch')->middleware('auth');
-Route::delete('/dashboard/absensi/delete/{absen}', [AbsensiController::class, 'delete'])->name('auth.absensi.delete')->middleware('auth');
-Route::post('/dashboard/absensi/simpan', [AbsensiController::class, 'store'])->name('auth.absensi.store')->middleware('auth');
+Route::get('/dashboard/absensi', [AbsensiController::class, 'index'])->name('auth.absensi.all')->middleware('guru');
+Route::get('/dashboard/absensi/validasi', [AbsensiController::class, 'validasiSebelumAbsen'])->name('auth.absensi.validasi')->middleware('guru');
+Route::get('/dashboard/absensi/tambah', [AbsensiController::class, 'create'])->name('auth.absensi.create')->middleware('guru');
+Route::get('/dashboard/absensi/edit/{absen}', [AbsensiController::class, 'edit'])->name('auth.absensi.edit')->middleware('guru');
+Route::patch('/dashboard/absensi/patch/{absen}', [AbsensiController::class, 'patch'])->name('auth.absensi.patch')->middleware('guru');
+Route::delete('/dashboard/absensi/delete/{absen}', [AbsensiController::class, 'delete'])->name('auth.absensi.delete')->middleware('guru');
+Route::post('/dashboard/absensi/simpan', [AbsensiController::class, 'store'])->name('auth.absensi.store')->middleware('guru');
 
 
 // pembayaran spp
@@ -77,3 +77,8 @@ Route::delete('/dashboard/pembayaran-spp/delete/{spp}', [PembayaranSppController
 
 //autenticate user
 Route::get('/dashboard', [UserController::class, 'dashboard'])->name('pages.dashboard')->middleware('auth');
+
+// data diri
+Route::get('dashboard/data-diri', [UserController::class, 'detailUser'])->name('pages.data-diri')->middleware('auth');
+Route::get('dashboard/data-diri/ubah', [UserController::class, 'editUser'])->name('pages.data-diri.ubah')->middleware('auth');
+Route::patch('dashboard/data-diri/ubah', [UserController::class, 'patch'])->name('pages.data-diri.patch')->middleware('auth');

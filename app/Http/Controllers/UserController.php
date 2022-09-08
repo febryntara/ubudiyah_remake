@@ -2,13 +2,18 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\DetailAbsensi;
 use App\Models\Mapel;
 use App\Models\SchoolEvent;
 use App\Models\User;
 use App\Models\UserRole;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\Facades\Hash;
+
+use function PHPUnit\Framework\isEmpty;
+use function PHPUnit\Framework\isNull;
 
 class UserController extends Controller
 {
@@ -97,7 +102,7 @@ class UserController extends Controller
         ];
     }
 
-    public function patch(Request $request, User $user)
+    public function patch(Request $request, $user = null)
     {
         $data = [
             'title' => 'Updating User Data',
@@ -125,7 +130,7 @@ class UserController extends Controller
             'moto_hidup' => 'string|nullable',
             'mapel_id' => 'numeric|nullable',
         ]);
-
+        $user = is_null($user) ? auth()->user() : User::where('id', $user)->first();
         $bool = $user->update($validated);
         if ($bool) {
             return back()->with('success', 'Data Berhasil Di Perbaharui');
@@ -163,14 +168,23 @@ class UserController extends Controller
     public function dashboard()
     {
         $user = User::all();
-        $data = [
-            'title' => 'Dashbaord',
-            'siswa' => $user->where('role_id', 1)->count(),
-            'guru' => $user->where('role_id', 3)->count(),
-            'umum' => $user->where('role_id', 2)->count(),
-            'mapel' => Mapel::all()->count(),
-            'event' => SchoolEvent::all()->count()
-        ];
+        if (Gate::allows('guru')) {
+            $data = [
+                'title' => 'Dashbaord Guru',
+                'siswa' => $user->where('role_id', 1)->count(),
+                'guru' => $user->where('role_id', 3)->count(),
+                'umum' => $user->where('role_id', 2)->count(),
+                'mapel' => Mapel::all()->count(),
+                'event' => SchoolEvent::all()->count()
+            ];
+        }
+        if (Gate::allows('siswa')) {
+            $data_absensi = DetailAbsensi::where('siswa_id', auth()->user()->id)->get();
+            $data = [
+                'title' => 'Dashbaord Siswa',
+                'absensi' => $data_absensi
+            ];
+        }
         return view('pages.autenticate.dashboard', $data);
     }
 
@@ -182,19 +196,19 @@ class UserController extends Controller
         ];
         return view('pages.manajemen-pengguna.allMP', $data);
     }
-    public function detailUser(User $user)
+    public function detailUser($user = null)
     {
         $data = [
             'title' => "Detail Pengguna",
-            'user' => $user
+            'user' => is_null($user) ? auth()->user() : User::where('id', $user)->first()
         ];
         return view('pages.manajemen-pengguna.detailMP', $data);
     }
-    public function editUser(User $user)
+    public function editUser($user = null)
     {
         $data = [
             'title' => "Ubah Pengguna",
-            'user' => $user,
+            'user' => is_null($user) ? auth()->user() : User::where('id', $user)->first(),
             'user_roles' => UserRole::all()
         ];
         return view('pages.manajemen-pengguna.editMP', $data);

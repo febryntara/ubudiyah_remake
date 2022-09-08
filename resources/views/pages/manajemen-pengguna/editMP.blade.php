@@ -1,8 +1,9 @@
 @extends('layouts.dashboard')
 
 @section('content')
+   {{-- {{ Request::is('dashboard/manajemen-akun*') ? 'OKE' : 'LOL' }} --}}
    <form class="grid grid-cols-2 gap-y-2 gap-x-3" method="post"
-      action="{{ route('auth.manajemen-user.patch', ['user' => $user]) }}">
+      action="{{ Request::is('dashboard/manajemen-akun*') ? route('auth.manajemen-user.patch', ['user' => $user]) : route('pages.data-diri.patch', ['user' => $user]) }}">
       @csrf
       @method('patch')
       <div class="col-span-2">

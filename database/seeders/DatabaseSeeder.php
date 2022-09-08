@@ -4,6 +4,7 @@ namespace Database\Seeders;
 
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 
+use App\Models\Absensi;
 use App\Models\User;
 use App\Models\UserRole;
 use Carbon\Carbon;
@@ -40,6 +41,7 @@ class DatabaseSeeder extends Seeder
             'jenis_kelamin' => '0',
         ]);
         User::factory(40)->create();
+        // Absensi::factory(10)->create();
         // \App\Models\User::factory(10)->create();
 
         // \App\Models\User::factory()->create([

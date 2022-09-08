@@ -3,13 +3,17 @@
 @section('content')
    <div class="grid grid-cols-2 gap-y-2">
       <div class="col-span-2">
-         <a href="{{ route('auth.manajemen-user') }}" class="primary-dashboard-btn">kembali</a>
-         <a href="{{ route('auth.manajemen-user.edit', ['user' => $user]) }}" class="warning-dashboard-btn">edit</a>
-         <form class="inline" action="{{ route('auth.manajemen-user.delete', ['user' => $user]) }}" method="post">
-            @csrf
-            @method('delete')
-            <button class="danger-dashboard-btn text-sm my-2">delete</button>
-         </form>
+         @can('guru')
+            <a href="{{ route('auth.manajemen-user') }}" class="primary-dashboard-btn">kembali</a>
+            <a href="{{ route('auth.manajemen-user.edit', ['user' => $user]) }}" class="warning-dashboard-btn">edit</a>
+            <form class="inline" action="{{ route('auth.manajemen-user.delete', ['user' => $user]) }}" method="post">
+               @csrf
+               @method('delete')
+               <button class="danger-dashboard-btn text-sm my-2">delete</button>
+            </form>
+         @else
+            <a href="{{ route('pages.data-diri.ubah') }}" class="warning-dashboard-btn">edit</a>
+         @endcan
       </div>
       <div class="col-span-2">
          <img class="w-[200px] h-[250px] object-cover"
