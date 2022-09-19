@@ -1,7 +1,7 @@
 @extends('layouts.dashboard')
 
 @section('content')
-   @dump($errors)
+   {{-- @dump($errors) --}}
    <div class="mb-2">
       <a href="{{ route('auth.schoolEvent.all') }}" class="danger-dashboard-btn">kembali ke awal</a>
       <a href="{{ route('auth.schoolEvent.detail', ['schoolEvent' => $acara]) }}" class="warning-dashboard-btn">kembali</a>

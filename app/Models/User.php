@@ -20,7 +20,7 @@ class User extends Authenticatable
     protected $guarded = [
         'id'
     ];
-    protected $with = ['userRole'];
+    protected $with = [];
 
     /**
      * The attributes that should be hidden for serialization.
@@ -44,5 +44,10 @@ class User extends Authenticatable
     public function userRole()
     {
         return $this->belongsTo(UserRole::class, 'role_id');
+    }
+
+    public function image()
+    {
+        return $this->morphOne(Image::class, 'imageable');
     }
 }

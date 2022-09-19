@@ -4,12 +4,16 @@
    <div class="grid grid-cols-2 gap-y-2">
       <div class="col-span-2">
          @can('guru')
-            <a href="{{ route('auth.manajemen-user') }}" class="primary-dashboard-btn">kembali</a>
-            <a href="{{ route('auth.manajemen-user.edit', ['user' => $user]) }}" class="warning-dashboard-btn">edit</a>
-            <form class="inline" action="{{ route('auth.manajemen-user.delete', ['user' => $user]) }}" method="post">
+            <a href="{{ route('auth.manajemen-user') }}"
+               class="inline-block text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800">Kembali</a>
+            <a href="{{ route('auth.manajemen-user.edit', ['user' => $user]) }}"
+               class="inline-block focus:outline-none text-white bg-yellow-400 hover:bg-yellow-500 focus:ring-4 focus:ring-yellow-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 dark:focus:ring-yellow-900">Edit</a>
+            <form class="inline-block" class="inline" action="{{ route('auth.manajemen-user.delete', ['user' => $user]) }}"
+               method="post">
                @csrf
                @method('delete')
-               <button class="danger-dashboard-btn text-sm my-2">delete</button>
+               <button type="sumbit"
+                  class="focus:outline-none text-white bg-red-700 hover:bg-red-800 focus:ring-4 focus:ring-red-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-900">Hapus</button>
             </form>
          @else
             <a href="{{ route('pages.data-diri.ubah') }}" class="warning-dashboard-btn">edit</a>

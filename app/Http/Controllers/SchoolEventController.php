@@ -85,23 +85,26 @@ class SchoolEventController extends Controller
         ]);
         // dd($schoolEvent->images);
         $bool = $schoolEvent->update($validated);
+        // return $schoolEvent->images->count();
         if ($bool) {
-            if ($schoolEvent->images->count() > count($request->file('gambar'))) {
-                foreach ($schoolEvent->images as $key => $value) {
-                    Storage::delete($value->src);
+            if (!is_null($request->file('gambar'))) {
+                if ($schoolEvent->images->count() > count($request->file('gambar'))) {
+                    foreach ($schoolEvent->images as $key => $value) {
+                        Storage::delete($value->src);
+                    }
+                    $schoolEvent->images()->delete();
                 }
-                $schoolEvent->images()->delete();
-            }
-            foreach ($request->file('gambar') as $item => $value) {
-                if ($item < $schoolEvent->images->count()) {
-                    Storage::delete($schoolEvent->images[$item]->src);
-                }
-                $is_delete = isset($schoolEvent->images[$item]) ? $schoolEvent->images[$item]->delete() : true;
-                if ($is_delete) {
-                    $img_src = $value->store('dynamic_images');
-                    $schoolEvent->images()->create([
-                        'src' => $img_src
-                    ]);
+                foreach ($request->file('gambar') as $item => $value) {
+                    if ($item < $schoolEvent->images->count()) {
+                        Storage::delete($schoolEvent->images[$item]->src);
+                    }
+                    $is_delete = isset($schoolEvent->images[$item]) ? $schoolEvent->images[$item]->delete() : true;
+                    if ($is_delete) {
+                        $img_src = $value->store('dynamic_images');
+                        $schoolEvent->images()->create([
+                            'src' => $img_src
+                        ]);
+                    }
                 }
             }
             return back()->with('success', 'Kegiatan Berhasil Diperbaharui');

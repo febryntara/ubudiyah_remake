@@ -209,7 +209,8 @@ class UserController extends Controller
         $data = [
             'title' => "Ubah Pengguna",
             'user' => is_null($user) ? auth()->user() : User::where('id', $user)->first(),
-            'user_roles' => UserRole::all()
+            'user_roles' => UserRole::all(),
+            'mapel' => Mapel::latest()->get()
         ];
         return view('pages.manajemen-pengguna.editMP', $data);
     }
