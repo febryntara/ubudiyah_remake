@@ -11,6 +11,8 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\FIle;
 
 use function PHPUnit\Framework\isEmpty;
 use function PHPUnit\Framework\isNull;
@@ -111,6 +113,7 @@ class UserController extends Controller
             'email' => 'required|email:dns',
             'name' => 'required|max:35',
             'role_id' => 'required|numeric',
+            'image' => 'image|file',
             'status_akun' => 'string',
             'umur' => 'required|numeric|max:100|min:6',
             'tanggal_lahir' => 'required|date',
@@ -131,9 +134,21 @@ class UserController extends Controller
             'mapel_id' => 'numeric|nullable',
         ]);
         $user = is_null($user) ? auth()->user() : User::where('id', $user)->first();
+
+        if ($request->file('image')) {
+            if (isset($user->image->src)) {
+                Storage::delete($user->image->src);
+            }
+            $image = $request->file('image');
+            $img_src = $image->store('dynamic_images');
+            $user->image()->delete();
+            $user->image()->create([
+                'src' => $img_src
+            ]);
+        }
         $bool = $user->update($validated);
         if ($bool) {
-            return back()->with('success', 'Data Berhasil Di Perbaharui');
+            return redirect()->route('auth.manajemen-user')->with('success', 'Data Berhasil Di Perbaharui');
         }
         return back()->with('error', 'Data gagal Di Perbaharui');
     }
